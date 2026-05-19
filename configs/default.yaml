@@ -1,0 +1,91 @@
+app_name: subtitle-corrector
+log_level: INFO
+memory:
+  sqlite_path: data/subtitle_memory.sqlite3
+entity_memory:
+  decay_rate: 0.8
+  min_weight: 0.2
+  boost_factor: 0.15
+normalization:
+  punctuation: false
+  spacing: true
+  traditional_to_simplified: false
+  lowercase_latin: false
+matcher:
+  fuzzy_threshold: 82.0
+  pinyin_threshold: 76.0  # 3字基准; 2字+4→80, 4+字-4→72 (见 _effective_pinyin_threshold)
+  max_candidates: 8
+scoring:
+  detector_weights:
+    pinyin: 0.35
+    terminology: 0.35
+    entity_consistency: 0.2
+    language_model: 0.1
+  llm_threshold: 0.72
+resolver:
+  provider: openai
+  model: mimo-v2.5
+  discovery_model: mimo-v2.5-pro
+  phase2_model: mimo-v2.5
+  timeout_seconds: 60
+  temperature: 0.1
+  max_tokens: 4096
+pipeline:
+  context_window: 2
+  dry_run: false
+candidate_expansion:
+  discovery_max_candidates_per_cue: 4
+  max_candidates_per_cue: 4
+  enable_entity_consistency: true
+  enable_long_entity_variant: true
+  enable_local_term: true
+  local_term_requires_stable_entity: true
+  terminology_requery_hint_enabled: true
+  terminology_requery_hint_min_alignment: 0.72
+  terminology_requery_hint_max_per_cue: 2
+correction_reuse:
+  enabled: true
+  min_confidence: 0.85
+  min_surface_cjk_len: 3
+  allowed_categories:
+    - character
+phase2:
+  max_per_batch: 10
+  retry_failed_batch_as_single_cue: true
+category_filter:
+  hot_categories:
+    - character
+    - weapon
+    - artifact
+    - artifact_piece
+    - skill
+    - constellation
+    - constellation_group
+    - enemy
+    - domain
+    - exploration_mechanic
+    - map_observation
+    - map_enemy
+    - local_specialty
+    - map_collectible
+    - map_transport
+    - map_chest
+  cold_categories:
+    - weapon_effect
+    - location
+    - title
+    - food
+    - recipe
+    - material
+    - wildlife
+    - achievement
+    - outfit
+  decay_rate: 0.7
+  min_weight: 0.3
+language_model:
+  enabled: false
+  model_path: data/normal_guide_lm.json
+  aliases_path: data/spoken_aliases_approved.csv
+  character_aliases_path: data/character_aliases_approved.csv
+  asr_aliases_path: data/asr_aliases_approved.csv
+  anomaly_threshold: 0.45

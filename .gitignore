@@ -1,0 +1,66 @@
+# === 环境与密钥 ===
+.env
+
+# === 数据文件 ===
+data/
+*.csv
+*.json
+*.sqlite3
+*.db
+*.jsonl
+
+# === 测试文件 ===
+tests/
+test_*.srt
+*_raw.srt
+*_gt.srt
+reports/
+
+# === Agent 相关 ===
+.claude/
+.worktrees/
+.codex_tmp/
+.code-review-graph/
+AGENTS.md
+CLAUDE.md
+CODE_REVIEW_GRAPH.md
+findings.md
+progress.md
+task_plan.md
+category_samples.json
+
+# === 文档 ===
+docs/
+
+# === 工具与辅助 ===
+tools/
+scripts/
+genshin_final_pack/
+genshin_terms.csv
+
+# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# === 缓存 ===
+.pytest_cache/
+.ruff_cache/
+.pytest-tmp/
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === OS ===
+.DS_Store
+Thumbs.db
+
+# === 日志 ===
+*.log
+spider_log.out
